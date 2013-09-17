@@ -11,10 +11,11 @@ import util.DateUtil;
 public class CourseSessionTest extends TestCase {
 	private CourseSession mSession;
 	private Date mStartDate;
+	private static final int CREDITS = 3;
 
 	public void setUp() {
 		mStartDate = DateUtil.createDate(2003, 1, 6);
-		mSession = CourseSession.create("ENGL", "101", mStartDate);
+		mSession = createCourseSession();
 	}
 
 	public void testSessionCreate() {
@@ -28,12 +29,14 @@ public class CourseSessionTest extends TestCase {
 
 		Student student1 = new Student("Cain DiVoe");
 		mSession.enroll(student1);
+		assertEquals(CREDITS, student1.getCredits());
 		assertEquals(1, mSession.getNumberOfStudents());
 		assertEquals(1, allStudents.size());
 		assertEquals(student1, allStudents.get(0));
 
 		Student student2 = new Student("Coralee DeVaughn");
 		mSession.enroll(student2);
+		assertEquals(CREDITS, student2.getCredits());
 		assertEquals(2, mSession.getNumberOfStudents());
 		assertEquals(2, allStudents.size());
 		assertEquals(student1, allStudents.get(0));
@@ -44,7 +47,7 @@ public class CourseSessionTest extends TestCase {
 		Date sixteenWeeksOut = DateUtil.createDate(2003, 4, 25);
 		assertEquals(sixteenWeeksOut, mSession.getEndDate());
 	}
-	
+
 	public void testCountSessions() {
 		CourseSession.resetCount();
 		createCourseSession();
@@ -52,8 +55,10 @@ public class CourseSessionTest extends TestCase {
 		createCourseSession();
 		assertEquals(2, CourseSession.getCount());
 	}
-	
+
 	private CourseSession createCourseSession() {
-		return CourseSession.create("ENGL", "101", mStartDate);
+		CourseSession session = CourseSession.create("ENGL", "101", mStartDate);
+		session.setNumberOfCredits(CourseSessionTest.CREDITS);
+		return session;
 	}
 }

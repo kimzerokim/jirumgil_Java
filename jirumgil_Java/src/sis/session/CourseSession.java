@@ -7,11 +7,12 @@ import java.util.GregorianCalendar;
 
 import sis.studentInfo.Student;
 
-public class CourseSession {
+public class CourseSession implements Comparable<CourseSession> {
 	private String mDepartment;
 	private String mSessionNumber;
 	private ArrayList<Student> mStudentList = new ArrayList<Student>();
 	private Date mStartDate;
+	private int mNumberOfCredits;
 	public static int count = 0;
 
 	private CourseSession(String department, String number, Date startDate) {
@@ -19,8 +20,9 @@ public class CourseSession {
 		mSessionNumber = number;
 		mStartDate = startDate;
 	}
-	
-	public static CourseSession create(String department, String number, Date startDate) {
+
+	public static CourseSession create(String department, String number,
+			Date startDate) {
 		incrementCount();
 		return new CourseSession(department, number, startDate);
 	}
@@ -39,6 +41,7 @@ public class CourseSession {
 
 	public void enroll(Student student) {
 		mStudentList.add(student);
+		student.addCredits(mNumberOfCredits);
 	}
 
 	public ArrayList<Student> getAllStudents() {
@@ -66,10 +69,19 @@ public class CourseSession {
 	}
 
 	public static void resetCount() {
-		count = 0;		
+		count = 0;
 	}
-	
+
 	public static void incrementCount() {
 		count++;
+	}
+
+	public void setNumberOfCredits(int credits) {
+		mNumberOfCredits = credits;
+	}
+
+	@Override
+	public int compareTo(CourseSession that) {
+		return this.getDepartment().compareTo(that.getDepartment());
 	}
 }

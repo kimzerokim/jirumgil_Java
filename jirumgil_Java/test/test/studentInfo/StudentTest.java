@@ -1,6 +1,7 @@
 package test.studentInfo;
 
 import junit.framework.TestCase;
+import sis.studentInfo.HonorsGradingStrategy;
 import sis.studentInfo.Student;
 import sis.studentInfo.Student.Grade;
 
@@ -27,7 +28,7 @@ public class StudentTest extends TestCase {
 		assertFalse(student.isFullTime());
 
 		student.addCredits(5);
-		assertEquals(student.CREDITS_REQUIRED_FOR_FULL_TIME,
+		assertEquals(Student.CREDITS_REQUIRED_FOR_FULL_TIME,
 				student.getCredits());
 		assertTrue(student.isFullTime());
 	}
@@ -57,7 +58,7 @@ public class StudentTest extends TestCase {
 	private void assertGpa(Student student, double points) {
 		assertEquals(points, student.getGpa(), GRADE_TOLERANCE);
 	}
-	
+
 	public void testCalculateHoneorsSudentGpa() {
 		assertGpa(createHonorsStudent(), 0.0);
 		assertGpa(createHonorsStudent(Student.Grade.A), 5.0);
@@ -66,18 +67,16 @@ public class StudentTest extends TestCase {
 		assertGpa(createHonorsStudent(Student.Grade.D), 2.0);
 		assertGpa(createHonorsStudent(Student.Grade.F), 0.0);
 	}
-	
+
 	private Student createHonorsStudent(Student.Grade grade) {
 		Student student = createHonorsStudent();
 		student.addGrade(grade);
 		return student;
 	}
-	
+
 	private Student createHonorsStudent() {
 		Student student = new Student("a");
-		student.setHonors();
+		student.setGradingStrategy(new HonorsGradingStrategy());
 		return student;
 	}
-	
-	
 }

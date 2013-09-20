@@ -2,7 +2,7 @@ package sis.studentInfo;
 
 import sis.studentInfo.Student.Grade;
 
-public class ReaularGradingStrategy implements GradingStrategy {
+public class RegularGradingStrategy implements GradingStrategy {
 	public int getGradePointsFor(Student.Grade grade) {
 		if (grade.equals(Grade.A))
 			return 4;

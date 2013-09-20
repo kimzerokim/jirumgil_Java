@@ -9,13 +9,11 @@ public class Student {
 	private int mCredits;
 	private String mState = "";
 	private ArrayList<Grade> grades = new ArrayList<Grade>();
+	private GradingStrategy mGradingStrategy = new RegularGradingStrategy();
 
 	public enum Grade {
 		A, B, C, D, F
 	};
-
-	private boolean isHonors = false;
-	private boolean isSenatorsSon = false;
 
 	public Student(String name) {
 		mName = name;
@@ -55,44 +53,14 @@ public class Student {
 			return 0.0;
 		double total = 0.0;
 		for (Grade grade : grades) {
-			total += gradePointsFor(grade);
+			total += mGradingStrategy.getGradePointsFor(grade);
 		}
 		return total / grades.size();
 	}
 
-	private double gradePointsFor(Grade grade) {
-		if (isSenatorsSon) {
-			if (grade.equals(Grade.A))
-				return 4;
-			if (grade.equals(Grade.B))
-				return 4;
-			if (grade.equals(Grade.C))
-				return 4;
-			if (grade.equals(Grade.D))
-				return 4;
-			return 3;
-		} else {
-			double points = basicGradePointsFor(grade);
-			if (isHonors)
-				if (points > 0)
-					points += 1;
-			return points;
-		}
+	// parameter에서 초기화를 하여 사용하는 방법등이 있을 수 있다.
+	public void setGradingStrategy(GradingStrategy gradingStrategy) {
+		mGradingStrategy = gradingStrategy;
 	}
 
-	private int basicGradePointsFor(Grade grade) {
-		if (grade.equals(Grade.A))
-			return 4;
-		if (grade.equals(Grade.B))
-			return 3;
-		if (grade.equals(Grade.C))
-			return 2;
-		if (grade.equals(Grade.D))
-			return 1;
-		return 0;
-	}
-
-	public void setHonors() {
-		isHonors = true;
-	}
 }

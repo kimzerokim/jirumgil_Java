@@ -11,11 +11,11 @@ public class CourseSession implements Comparable<CourseSession> {
 	private String mDepartment;
 	private String mSessionNumber;
 	private ArrayList<Student> mStudentList = new ArrayList<Student>();
-	private Date mStartDate;
+	protected Date mStartDate;
 	private int mNumberOfCredits;
 	public static int count = 0;
 
-	private CourseSession(String department, String number, Date startDate) {
+	protected CourseSession(String department, String number, Date startDate) {
 		mDepartment = department;
 		mSessionNumber = number;
 		mStartDate = startDate;

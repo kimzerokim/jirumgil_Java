@@ -9,10 +9,20 @@ public class Student {
 	private int mCredits;
 	private String mState = "";
 	private ArrayList<Grade> grades = new ArrayList<Grade>();
-	private GradingStrategy mGradingStrategy = new RegularGradingStrategy();
+	private GradingStrategy mGradingStrategy = new BasicGradingStrategy();
 
 	public enum Grade {
-		A, B, C, D, F
+		A(4), B(3), C(2), D(1), F(0);
+
+		private int points;
+
+		Grade(int points) {
+			this.points = points;
+		}
+
+		int getPoints() {
+			return points;
+		}
 	};
 
 	public Student(String name) {

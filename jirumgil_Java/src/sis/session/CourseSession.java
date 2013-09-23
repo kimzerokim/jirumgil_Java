@@ -1,91 +1,33 @@
 package sis.session;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
-import sis.studentInfo.Student;
-
-public class CourseSession implements Comparable<CourseSession> {
-	private String mDepartment;
-	private String mSessionNumber;
-	private ArrayList<Student> mStudentList = new ArrayList<Student>();
-	protected Date mStartDate;
-	private int mNumberOfCredits;
-	public static int count = 0;
-
-	protected CourseSession(String department, String number, Date startDate) {
-		mDepartment = department;
-		mSessionNumber = number;
-		mStartDate = startDate;
-	}
+public class CourseSession extends Session {
+	private static int count = 0;
 
 	public static CourseSession create(String department, String number,
 			Date startDate) {
-		incrementCount();
 		return new CourseSession(department, number, startDate);
 	}
 
-	public String getDepartment() {
-		return mDepartment;
+	protected CourseSession(String department, String number, Date startDate) {
+		super(department, number, startDate);
+		CourseSession.incrementCount();
 	}
 
-	public String getNumber() {
-		return mSessionNumber;
-	}
-
-	public int getNumberOfStudents() {
-		return mStudentList.size();
-	}
-
-	public void enroll(Student student) {
-		mStudentList.add(student);
-		student.addCredits(mNumberOfCredits);
-	}
-
-	public ArrayList<Student> getAllStudents() {
-		return mStudentList;
-	}
-
-	public Student get(int index) {
-		return mStudentList.get(index);
-	}
-
-	public Date getEndDate() {
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.setTime(mStartDate);
-		int numberOfDays = 16 * 7 - 3;
-		calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-		return calendar.getTime();
-	}
-
-	public Date getStartDate() {
-		return mStartDate;
-	}
-
-	public static int getCount() {
-		return count;
+	private static void incrementCount() {
+		++count;
 	}
 
 	public static void resetCount() {
 		count = 0;
 	}
 
-	public static void incrementCount() {
-		count++;
+	public static int getCount() {
+		return count;
 	}
 
-	public void setNumberOfCredits(int credits) {
-		mNumberOfCredits = credits;
-	}
-
-	@Override
-	public int compareTo(CourseSession that) {
-		int compare = this.getDepartment().compareTo(that.getDepartment());
-		if (compare != 0) {
-			return compare;
-		}
-		return this.getNumber().compareTo(that.getNumber());
+	protected int getSessionLength() {
+		return 16;
 	}
 }

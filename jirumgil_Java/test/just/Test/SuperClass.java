@@ -1,0 +1,9 @@
+package just.Test;
+
+public class SuperClass {
+	static boolean constructorWasCalled = false;
+	
+	SuperClass(String parm) {
+		constructorWasCalled = true;
+	}
+}

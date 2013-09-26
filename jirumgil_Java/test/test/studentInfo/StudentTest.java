@@ -9,9 +9,23 @@ public class StudentTest extends TestCase {
 	private static final double GRADE_TOLERANCE = 0.05;
 
 	public void testCreate() {
-		Student student = new Student("Jane Doe");
-		String studentName = student.getName();
-		assertEquals("Jane Doe", studentName);
+		final String firstStudentName = "Jane Doe";
+		Student firstStudent = new Student(firstStudentName);
+		assertEquals("Jane", firstStudent.getFirstName());
+		assertEquals("Doe", firstStudent.getLastName());
+		assertEquals("", firstStudent.getMiddleName());
+
+		final String secondStudentName = "Blow";
+		Student secondStudent = new Student(secondStudentName);
+		asserEquals("", secondStudent.getFirstName());
+		asserEquals("Blow", secondStudent.getLastName());
+		asserEquals("", secondStudent.getMiddleName());
+
+		final String thirdStudentName = "Raymond Douglas Davies";
+		Student thirdStudent = new Student(thirdStudentName);
+		assertEquals("Raymond", thirdStudent.getFirstName());
+		assertEquals("Davies", thirdStudent.getLastName());
+		assertEquals("Douglas", thirdStudent.getMiddleName());
 	}
 
 	public void testStudentStatus() {

@@ -17,9 +17,9 @@ public class StudentTest extends TestCase {
 
 		final String secondStudentName = "Blow";
 		Student secondStudent = new Student(secondStudentName);
-		asserEquals("", secondStudent.getFirstName());
-		asserEquals("Blow", secondStudent.getLastName());
-		asserEquals("", secondStudent.getMiddleName());
+		assertEquals("", secondStudent.getFirstName());
+		assertEquals("Blow", secondStudent.getLastName());
+		assertEquals("", secondStudent.getMiddleName());
 
 		final String thirdStudentName = "Raymond Douglas Davies";
 		Student thirdStudent = new Student(thirdStudentName);

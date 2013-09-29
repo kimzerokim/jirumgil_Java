@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import sis.studentInfo.Student;
 
-abstract public class Session implements Comparable<Session> {
+abstract public class Session implements Comparable<Session>, Iterable<Student> {
 	private String mDepartment;
 	private String mNumber;
 	private List<Student> mStudents = new ArrayList<Student>();
@@ -74,4 +75,8 @@ abstract public class Session implements Comparable<Session> {
 		return calendar.getTime();
 	}
 
+	public Iterator<Student> iterator() {
+		return mStudents.iterator();
+
+	}
 }

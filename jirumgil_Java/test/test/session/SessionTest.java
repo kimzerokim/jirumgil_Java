@@ -2,6 +2,7 @@ package test.session;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import junit.framework.TestCase;
 import sis.session.CourseSession;
@@ -54,4 +55,21 @@ abstract public class SessionTest extends TestCase {
 		assertTrue(sessionC.compareTo(sessionD) < 0);
 		assertTrue(sessionD.compareTo(sessionC) > 0);
 	}
+	
+	public void testIterate() {
+		enrollStudents(mSession);
+		
+		List<Student> results = new ArrayList<Student>();
+		for (Student student : mSession)
+			results.add(student);
+		
+		assertEquals(mSession.getAllStudents(), results);
+	}
+	
+	private void enrollStudents(Session session) {
+		session.enroll(new Student("1"));
+		session.enroll(new Student("2"));
+		session.enroll(new Student("3"));
+	}
 }
+

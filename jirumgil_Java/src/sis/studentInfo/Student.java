@@ -1,6 +1,7 @@
 package sis.studentInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
 	public static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
@@ -10,6 +11,9 @@ public class Student {
 	private String mState = "";
 	private ArrayList<Grade> grades = new ArrayList<Grade>();
 	private GradingStrategy mGradingStrategy = new BasicGradingStrategy();
+	private String firstName = "";
+	private String middleName = "";
+	private String lastName;
 
 	public enum Grade {
 		A(4), B(3), C(2), D(1), F(0);
@@ -25,9 +29,11 @@ public class Student {
 		}
 	};
 
-	public Student(String name) {
-		mName = name;
+	public Student(String fullname) {
+		mName = fullname;
 		mCredits = 0;
+		List<String> nameParts = split(fullname);
+		setName(nameParts);
 	}
 
 	public String getName() {
@@ -73,4 +79,39 @@ public class Student {
 		mGradingStrategy = gradingStrategy;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	private void setName(List<String> nameParts) {
+		this.lastName = removeLast(nameParts);
+		String name = removeLast(nameParts);
+		if (nameParts.isEmpty())
+			this.firstName = name;
+		else {
+			this.middleName = name;
+			this.firstName = removeLast(nameParts);
+		}
+	}
+
+	private String removeLast(List<String> list) {
+		if (list.isEmpty())
+			return "";
+		return list.remove(list.size() - 1);
+	}
+
+	private List<String> split(String fullName) {
+		List<String> results = new ArrayList<String>();
+		for (String name : fullName.split(" "))
+			results.add(name);
+		return results;
+	}
 }

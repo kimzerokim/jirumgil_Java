@@ -1,5 +1,6 @@
 package test.session;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,12 @@ abstract public class SessionTest extends TestCase {
 		session.enroll(new Student("1"));
 		session.enroll(new Student("2"));
 		session.enroll(new Student("3"));
+	}
+	
+	public void testSessionUrl() throws MalformedURLException {
+		final String url = "http://course.langrsoft.com/cmsc300";
+		mSession.setUrl(url);
+		assertEquals(url, mSession.getUrl().toString());
 	}
 }
 

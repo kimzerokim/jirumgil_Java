@@ -1,6 +1,5 @@
 package test.session;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,8 +7,9 @@ import java.util.List;
 import junit.framework.TestCase;
 import sis.session.CourseSession;
 import sis.session.Session;
+import sis.studentInfo.SessionException;
 import sis.studentInfo.Student;
-import util.DateUtil;
+import sis.util.DateUtil;
 
 abstract public class SessionTest extends TestCase {
 	protected Session mSession;
@@ -73,10 +73,21 @@ abstract public class SessionTest extends TestCase {
 		session.enroll(new Student("3"));
 	}
 	
-	public void testSessionUrl() throws MalformedURLException {
+	public void testSessionUrl() throws SessionException {
 		final String url = "http://course.langrsoft.com/cmsc300";
 		mSession.setUrl(url);
 		assertEquals(url, mSession.getUrl().toString());
+	}
+	
+	public void testInvalidSessionUrl() {
+		final String url = "http://course.langrsoft.com/cmsc300";
+		try {
+			mSession.setUrl(url);
+			fail("expected exception due to invalid protocol in URL");
+		}
+		catch (SessionException success){
+			
+		}
 	}
 }
 

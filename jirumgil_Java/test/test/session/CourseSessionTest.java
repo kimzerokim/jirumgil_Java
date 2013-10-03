@@ -1,13 +1,13 @@
 package test.session;
 
-import static util.ReportConstant.NEWLINE;
+import static sis.util.ReportConstant.NEWLINE;
 
 import java.util.Date;
 
 import sis.report.CourseReport;
 import sis.session.CourseSession;
 import sis.session.Session;
-import util.DateUtil;
+import sis.util.DateUtil;
 
 public class CourseSessionTest extends SessionTest {
 	private static final int CREDITS = 3;

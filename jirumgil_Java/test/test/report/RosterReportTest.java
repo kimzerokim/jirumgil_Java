@@ -4,8 +4,8 @@ import junit.framework.TestCase;
 import sis.report.RosterReporter;
 import sis.session.CourseSession;
 import sis.studentInfo.Student;
-import util.DateUtil;
-import static util.ReportConstant.NEWLINE;
+import sis.util.DateUtil;
+import static sis.util.ReportConstant.NEWLINE;
 
 public class RosterReportTest extends TestCase {
 	public void testRosterReport() {

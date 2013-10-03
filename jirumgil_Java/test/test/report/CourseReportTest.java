@@ -1,6 +1,6 @@
 package test.report;
 
-import static util.ReportConstant.NEWLINE;
+import static sis.util.ReportConstant.NEWLINE;
 
 import java.util.Date;
 

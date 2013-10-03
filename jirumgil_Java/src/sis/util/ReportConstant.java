@@ -1,4 +1,4 @@
-package util;
+package sis.util;
 
 public class ReportConstant {
 	public static final String NEWLINE = 

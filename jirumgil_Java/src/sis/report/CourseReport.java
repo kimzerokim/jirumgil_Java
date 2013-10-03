@@ -3,7 +3,7 @@ package sis.report;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static util.ReportConstant.NEWLINE;
+import static sis.util.ReportConstant.NEWLINE;
 import sis.session.CourseSession;
 
 public class CourseReport {

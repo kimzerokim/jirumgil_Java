@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
+import sis.studentInfo.SessionException;
 import sis.studentInfo.Student;
 
 abstract public class Session implements Comparable<Session>, Iterable<Student> {
@@ -81,11 +82,20 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
 	public Iterator<Student> iterator() {
 		return mStudents.iterator();
 	}
-	
-	public void setUrl(String urlString) throws MalformedURLException{
-		this.url = new URL(urlString);
+
+	public void setUrl(String urlString) throws SessionException {
+		try {
+			this.url = new URL(urlString);
+		} catch (MalformedURLException e) {
+			log(e);
+			throw new SessionException();
+		}
 	}
-	
+
+	private void log(Exception e) {
+
+	}
+
 	public URL getUrl() {
 		return url;
 	}

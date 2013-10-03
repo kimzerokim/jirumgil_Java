@@ -1,9 +1,10 @@
-package util;
+package test.util;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import sis.util.DateUtil;
 import junit.framework.TestCase;
 
 public class DateUtilTest extends TestCase {

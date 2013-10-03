@@ -4,8 +4,8 @@ import java.util.Date;
 
 import sis.session.Session;
 import sis.summer.SummerCourseSession;
+import sis.util.DateUtil;
 import test.session.SessionTest;
-import util.DateUtil;
 
 public class SummerCourseSessionTest extends SessionTest {
 	public void testEndDate() {

@@ -2,6 +2,7 @@ package sis.studentInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Student {
 	public static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
@@ -14,7 +15,10 @@ public class Student {
 	private String firstName = "";
 	private String middleName = "";
 	private String lastName;
-
+	public static final int MAX_NAME_PARTS = 3;
+	public static final String TOO_MANY_NAME_PARTS_MSG = "Student name '%s' contains more than %d parts";
+	public final static Logger logger = Logger.getLogger(Student.class.getName());
+	
 	public enum Grade {
 		A(4), B(3), C(2), D(1), F(0);
 
@@ -29,10 +33,17 @@ public class Student {
 		}
 	};
 
-	public Student(String fullname) {
-		mName = fullname;
+	public Student(String fullName) {
+		mName = fullName;
 		mCredits = 0;
-		List<String> nameParts = split(fullname);
+		List<String> nameParts = split(fullName);
+		final int maximumNumberOfNameParts = 3;
+		if (nameParts.size() > maximumNumberOfNameParts) {
+			String message = String.format(Student.TOO_MANY_NAME_PARTS_MSG,
+					fullName, MAX_NAME_PARTS);
+			Student.logger.info(message);
+			throw new StudentNameFormatException(message);
+		}
 		setName(nameParts);
 	}
 

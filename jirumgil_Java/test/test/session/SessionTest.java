@@ -1,5 +1,6 @@
 package test.session;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,10 +84,11 @@ abstract public class SessionTest extends TestCase {
 		final String url = "http://course.langrsoft.com/cmsc300";
 		try {
 			mSession.setUrl(url);
-			fail("expected exception due to invalid protocol in URL");
+			//fail("expected exception due to invalid protocol in URL");
 		}
-		catch (SessionException success){
-			
+		catch (SessionException expectedException){
+			Throwable cause = expectedException.getCause();
+			assertEquals(MalformedURLException.class, cause.getClass());
 		}
 	}
 }

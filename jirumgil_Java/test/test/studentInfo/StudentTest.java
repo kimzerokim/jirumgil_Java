@@ -1,9 +1,13 @@
 package test.studentInfo;
 
+import java.util.logging.Handler;
+
 import junit.framework.TestCase;
 import sis.studentInfo.HonorsGradingStrategy;
 import sis.studentInfo.Student;
 import sis.studentInfo.Student.Grade;
+import sis.studentInfo.StudentNameFormatException;
+import sis.studentInfo.TestHandler;
 
 public class StudentTest extends TestCase {
 	private static final double GRADE_TOLERANCE = 0.05;
@@ -92,5 +96,21 @@ public class StudentTest extends TestCase {
 		Student student = new Student("a");
 		student.setGradingStrategy(new HonorsGradingStrategy());
 		return student;
+	}
+
+	public void testBadlyFormattedName() {
+		Handler handler = new TestHandler();
+		Student.logger.addHandler(handler);
+		
+		final String studentName = "a b c d";
+		try {
+			new Student(studentName);
+			fail("expected exception from 4-part name");
+		} catch (StudentNameFormatException expectedException) {
+			String message = String.format(Student.TOO_MANY_NAME_PARTS_MSG,
+					studentName, Student.MAX_NAME_PARTS);
+			assertEquals(message, expectedException.getMessage());
+			assertEquals(message, ((TestHandler)handler).getMessage());
+		}
 	}
 }

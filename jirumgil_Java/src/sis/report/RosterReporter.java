@@ -4,20 +4,20 @@ import sis.session.Session;
 import sis.studentInfo.Student;
 import static sis.util.ReportConstant.NEWLINE;
 
-class RosterReporter {
-   static final String ROSTER_REPORT_HEADER =
+public class RosterReporter {
+   public static final String ROSTER_REPORT_HEADER =
       "Student" + NEWLINE +
       "-------" + NEWLINE;
-   static final String ROSTER_REPORT_FOOTER =
+   public static final String ROSTER_REPORT_FOOTER =
       NEWLINE + "# students = ";
 
    private Session session;
 
-   RosterReporter(Session session) {
+   public RosterReporter(Session session) {
       this.session = session;
    }
 
-   String getReport() {
+   public String getReport() {
       StringBuilder buffer = new StringBuilder();
 
       writeHeader(buffer);

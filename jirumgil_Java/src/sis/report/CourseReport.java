@@ -2,24 +2,25 @@ package sis.report;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-import static sis.util.ReportConstant.NEWLINE;
-import sis.session.CourseSession;
+import sis.session.Session;
 
 public class CourseReport {
-	private ArrayList<CourseSession> mSessions = new ArrayList<CourseSession>();
+   private List<Session> sessions =
+      new ArrayList<Session>();
 
-	public void add(CourseSession session) {
-		mSessions.add(session);
-	}
+   public void add(Session session) {
+      sessions.add(session);
+   }
 
-	public String text() {
-		Collections.sort(mSessions);
-		StringBuilder builder = new StringBuilder();
-		for (CourseSession session : mSessions) {
-			builder.append(session.getDepartment() + " " + session.getNumber()
-					+ NEWLINE);
-		}
-		return builder.toString();
-	}
+   public String text() {
+      Collections.sort(sessions);
+      StringBuilder builder = new StringBuilder();
+      for (Session session: sessions)
+         builder.append(
+            String.format("%s %s%n",
+               session.getDepartment(), session.getNumber()));
+      return builder.toString();
+   }
 }

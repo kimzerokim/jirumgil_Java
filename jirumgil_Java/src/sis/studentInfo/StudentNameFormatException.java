@@ -1,7 +1,8 @@
 package sis.studentInfo;
 
-public class StudentNameFormatException extends IllegalArgumentException {
-	public StudentNameFormatException (String message) {
-		super(message);
-	}
+public class StudentNameFormatException
+      extends IllegalArgumentException {
+   public StudentNameFormatException(String message) {
+      super(message);
+   }
 }
